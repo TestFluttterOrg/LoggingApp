@@ -28,7 +28,7 @@ class AppButton extends StatelessWidget {
     return Container(
       width: width,
       margin: margin,
-      height: 45.h,
+      height: 40.h,
       child: ElevatedButton(
         onPressed: isDisabled
             ? null

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logging_app/feature/presentation/components/app_scaffold.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -7,10 +8,12 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(
-        title: Text("TEST"),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 20.h,
+          horizontal: 20.h,
+        ),
       ),
-      body: Container(),
     );
   }
 }

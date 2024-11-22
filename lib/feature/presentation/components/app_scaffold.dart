@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppScaffold extends StatelessWidget {
   final AppBar? appBar;
   final Widget? bottomBar;
-  final Color? backgroundColor;
+  final Color backgroundColor;
   final Widget body;
 
   const AppScaffold({
     required this.body,
     this.appBar,
     this.bottomBar,
-    this.backgroundColor,
+    this.backgroundColor = Colors.white,
     super.key,
   });
 
