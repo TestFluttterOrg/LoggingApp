@@ -15,13 +15,25 @@ class MainLoadingState extends MainState {
 
 class MainLoadedState extends MainState {
   final List<ButtonModel> buttonList;
+  final String message;
 
   MainLoadedState({
-    required this.buttonList,
+    this.buttonList = const [],
+    this.message = "",
   });
+
+  MainLoadedState copyWith({
+    List<ButtonModel>? buttonList,
+    String? message,
+  }) =>
+      MainLoadedState(
+        buttonList: buttonList ?? this.buttonList,
+        message: message ?? this.message,
+      );
 
   @override
   List<Object?> get props => [
         buttonList,
+        message,
       ];
 }

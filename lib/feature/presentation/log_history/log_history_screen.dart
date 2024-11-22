@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:logging_app/core/constants/app_constants.dart';
 import 'package:logging_app/core/di/dependency_injection.dart' as di;
 import 'package:logging_app/feature/domain/model/log_model.dart';
-import 'package:logging_app/feature/presentation/components/app_button.dart';
 import 'package:logging_app/feature/presentation/components/app_scaffold.dart';
 import 'package:logging_app/feature/presentation/log_history/bloc/log_history_bloc.dart';
 import 'package:logging_app/feature/presentation/log_history/bloc/log_history_state.dart';
