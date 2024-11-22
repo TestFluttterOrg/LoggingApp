@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logging_app/core/routes/routers.dart';
+import 'package:logging_app/core/di/dependency_injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -11,6 +15,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    //Set to portrait mode
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return ScreenUtilInit(
       builder: (context, widget) {
         return MaterialApp.router(
@@ -25,7 +36,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 16.h,
                 fontWeight: FontWeight.w400,
               ),
-              iconTheme: IconThemeData(color: Colors.white),
+              iconTheme: const IconThemeData(color: Colors.white),
             ),
           ),
           routerConfig: Routes.routers,
