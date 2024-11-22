@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:logging_app/core/routes/app_routes.dart';
+import 'package:logging_app/feature/presentation/main/main_screen.dart';
 import 'package:logging_app/feature/presentation/splash/splash_screen.dart';
 
 class Routes {
@@ -14,6 +15,14 @@ class Routes {
         name: AppRoutes.splash,
         builder: (_, __) {
           return const SplashScreen();
+        },
+      ),
+      //Main
+      GoRoute(
+        path: AppRoutes.main,
+        name: AppRoutes.main,
+        builder: (_, __) {
+          return const MainScreen();
         },
       ),
     ],
