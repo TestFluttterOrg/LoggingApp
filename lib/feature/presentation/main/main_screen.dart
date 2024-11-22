@@ -60,6 +60,7 @@ class _ButtonListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<MainBloc>();
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) {
         final currentState = state as MainLoadedState;
@@ -69,7 +70,9 @@ class _ButtonListView extends StatelessWidget {
           itemBuilder: (context, i) {
             final data = list[i];
             return AppButton(
-              onPressed: () {},
+              onPressed: () {
+                bloc.onButtonPressed(data.id);
+              },
               label: data.label,
             );
           },

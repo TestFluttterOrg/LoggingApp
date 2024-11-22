@@ -1,7 +1,14 @@
+import 'package:logging_app/feature/data/datasource/log_datasource.dart';
 import 'package:logging_app/feature/domain/model/button_model.dart';
 import 'package:logging_app/feature/domain/repository/app_repository.dart';
 
 class AppRepositoryImpl extends AppRepository {
+  final LogDataSource logDataSource;
+
+  AppRepositoryImpl({
+    required this.logDataSource,
+  });
+
   @override
   Future<List<ButtonModel>> getButtonList() async {
     //await Future.delayed(const Duration(seconds: 1));

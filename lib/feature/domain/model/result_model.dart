@@ -1,4 +1,6 @@
-class ResultModel<T> {
+import 'package:equatable/equatable.dart';
+
+class ResultModel<T> extends Equatable {
   final bool isSuccess;
   final String message;
   final T? data;
@@ -8,4 +10,11 @@ class ResultModel<T> {
     this.message = "",
     this.data,
   });
+
+  @override
+  List<Object?> get props => [
+        isSuccess,
+        message,
+        data,
+      ];
 }

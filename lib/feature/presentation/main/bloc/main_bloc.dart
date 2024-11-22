@@ -18,4 +18,8 @@ class MainBloc extends Cubit<MainState> {
       emit(MainLoadedState(buttonList: buttonList));
     }
   }
+
+  void onButtonPressed(String id) {
+
+  }
 }
