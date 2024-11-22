@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging_app/core/routes/app_routes.dart';
-import 'package:logging_app/core/routes/routers.dart';
-import 'package:logging_app/feature/presentation/components/app_scaffold.dart';
 import 'package:logging_app/core/di/dependency_injection.dart' as di;
 import 'package:logging_app/feature/presentation/splash/bloc/splash_bloc.dart';
 import 'package:logging_app/feature/presentation/splash/bloc/splash_state.dart';
