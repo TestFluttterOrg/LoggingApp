@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:logging_app/core/constants/app_constants.dart';
 import 'package:logging_app/core/di/dependency_injection.dart' as di;
+import 'package:logging_app/core/routes/routers.dart';
 import 'package:logging_app/feature/domain/model/log_model.dart';
+import 'package:logging_app/feature/presentation/components/app_dialog.dart';
 import 'package:logging_app/feature/presentation/components/app_scaffold.dart';
 import 'package:logging_app/feature/presentation/log_history/bloc/log_history_bloc.dart';
 import 'package:logging_app/feature/presentation/log_history/bloc/log_history_state.dart';
@@ -28,9 +31,30 @@ class _LogHistoryForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<LogHistoryBloc>();
     return AppScaffold(
       appBar: AppBar(
         title: const Text("LOG HISTORY"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              AppDialog.showConfirmation(
+                context,
+                title: "Delete Confirmation",
+                message: "Are you sure you want to delete all log history?",
+                confirmText: "Delete",
+                onConfirm: () {
+                  context.pop();
+                  bloc.deleteLogHistory();
+                }
+              );
+            },
+            icon: Icon(
+              Icons.delete,
+              size: 22.h,
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<LogHistoryBloc, LogHistoryState>(
         builder: (context, state) {

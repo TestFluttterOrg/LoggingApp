@@ -10,16 +10,19 @@ class LogHistoryBloc extends Cubit<LogHistoryState> {
   }) : super(LogHistoryInitialState());
 
   void initialize() async {
-    if (state is LogHistoryInitialState) {
-      emit(LogHistoryLoadingState());
+    emit(LogHistoryLoadingState());
 
-      //Get Log History
-      final result = await appRepository.getLogHistory();
-      if (result.isSuccess) {
-        emit(LogHistoryLoadedState(logList: result.data ?? []));
-      } else {
-        emit(LogHistoryErrorState(message: result.message));
-      }
+    //Get Log History
+    final result = await appRepository.getLogHistory();
+    if (result.isSuccess) {
+      emit(LogHistoryLoadedState(logList: result.data ?? []));
+    } else {
+      emit(LogHistoryErrorState(message: result.message));
     }
+  }
+
+  void deleteLogHistory() async {
+    await appRepository.deleteLogs();
+    initialize();
   }
 }

@@ -67,4 +67,9 @@ class AppRepositoryImpl extends AppRepository {
       );
     }
   }
+
+  @override
+  Future<void> deleteLogs() async {
+    await logDataSource.deleteLogs();
+  }
 }

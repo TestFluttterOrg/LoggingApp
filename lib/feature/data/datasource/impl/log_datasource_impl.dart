@@ -71,4 +71,20 @@ class LogDataSourceImpl extends LogDataSource {
       );
     }
   }
+
+  @override
+  Future<ResultEntity> deleteLogs() async {
+    try {
+      await database.rawDelete("DELETE FROM ${DBConstants.logColTblName}");
+      return const ResultEntity(
+        isSuccess: true,
+        message: "Logs has been deleted",
+      );
+    } catch (_) {
+      return const ResultEntity(
+        isSuccess: false,
+        message: "Logs failed to delete",
+      );
+    }
+  }
 }

@@ -6,4 +6,5 @@ abstract class AppRepository {
   Future<List<ButtonModel>> getButtonList();
   Future<ResultModel<LogModel>> saveLog(LogModel data);
   Future<ResultModel<List<LogModel>>> getLogHistory();
+  Future<void> deleteLogs();
 }
