@@ -1,7 +1,7 @@
 import 'package:logging_app/feature/data/constants/db_constants.dart';
 import 'package:logging_app/feature/data/datasource/log_datasource.dart';
 import 'package:logging_app/feature/domain/entity/data/log/log_entity.dart';
-import 'package:logging_app/feature/domain/model/result_model.dart';
+import 'package:logging_app/feature/domain/entity/result_entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LogDataSourceImpl extends LogDataSource {
@@ -21,10 +21,10 @@ class LogDataSourceImpl extends LogDataSource {
   }
 
   @override
-  Future<ResultModel<int>> saveLog(LogEntity data) async {
+  Future<ResultEntity<int>> saveLog(LogEntity data) async {
     try {
       final result = await database.rawInsert(
-        '''INSERT INTO (
+        '''INSERT INTO ${DBConstants.logColTblName} (
         ${DBConstants.logColName},
         ${DBConstants.logColMessage},
         ${DBConstants.logColCreatedAt}
@@ -35,13 +35,13 @@ class LogDataSourceImpl extends LogDataSource {
           data.createdAt,
         ],
       );
-      return ResultModel(
+      return ResultEntity(
         isSuccess: true,
         message: "Log saved successfully",
         data: result,
       );
     } catch (_) {
-      return const ResultModel(
+      return const ResultEntity(
         isSuccess: false,
         message: "Log save failed",
       );
@@ -49,17 +49,17 @@ class LogDataSourceImpl extends LogDataSource {
   }
 
   @override
-  Future<ResultModel<List<LogEntity>>> getLogs() async {
+  Future<ResultEntity<List<LogEntity>>> getLogs() async {
     try {
       final result = await database.rawQuery(
           "SELECT * FROM ${DBConstants.logColTblName} ORDER BY ${DBConstants.logColId} DESC");
       final data = result.map((e) => LogEntity.fromJson(e)).toList();
-      return ResultModel(
+      return ResultEntity(
         isSuccess: true,
         data: data,
       );
     } catch (_) {
-      return const ResultModel(
+      return const ResultEntity(
         isSuccess: false,
         message: "Failed to get logs",
       );

@@ -13,6 +13,19 @@ class LogModel extends Equatable {
     this.createdAt,
   });
 
+  LogModel copyWith({
+    String? id,
+    String? name,
+    String? message,
+    DateTime? createAt,
+  }) =>
+      LogModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        message: message ?? this.message,
+        createdAt: createAt ?? this.createdAt,
+      );
+
   @override
   List<Object?> get props => [
         id,

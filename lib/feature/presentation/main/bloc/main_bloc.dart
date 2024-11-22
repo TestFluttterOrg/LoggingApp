@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logging_app/feature/domain/model/log_model.dart';
 import 'package:logging_app/feature/domain/repository/app_repository.dart';
 import 'package:logging_app/feature/presentation/main/bloc/main_state.dart';
 
@@ -19,7 +20,12 @@ class MainBloc extends Cubit<MainState> {
     }
   }
 
-  void onButtonPressed(String id) {
-
+  void onButtonPressed(String buttonId) async {
+    final data = LogModel(
+      name: buttonId,
+      message: "$buttonId pressed",
+      createdAt: DateTime.now(),
+    );
+    await appRepository.saveLog(data);
   }
 }
