@@ -4,6 +4,7 @@ import 'package:logging_app/feature/data/datasource/log_datasource.dart';
 import 'package:logging_app/feature/data/repository/app_datasource_impl.dart';
 import 'package:logging_app/feature/data/service/database_service.dart';
 import 'package:logging_app/feature/domain/repository/app_repository.dart';
+import 'package:logging_app/feature/presentation/log_history/bloc/log_history_bloc.dart';
 import 'package:logging_app/feature/presentation/main/bloc/main_bloc.dart';
 import 'package:logging_app/feature/presentation/splash/bloc/splash_bloc.dart';
 
@@ -32,6 +33,11 @@ Future<void> init() async {
   );
   vf.registerLazySingleton<MainBloc>(
     () => MainBloc(
+      appRepository: vf.call(),
+    ),
+  );
+  vf.registerFactory<LogHistoryBloc>(
+    () => LogHistoryBloc(
       appRepository: vf.call(),
     ),
   );

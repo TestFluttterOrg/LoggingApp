@@ -54,9 +54,15 @@ class LogDataSourceImpl extends LogDataSource {
       final result = await database.rawQuery(
           "SELECT * FROM ${DBConstants.logColTblName} ORDER BY ${DBConstants.logColId} DESC");
       final data = result.map((e) => LogEntity.fromJson(e)).toList();
-      return ResultEntity(
-        isSuccess: true,
-        data: data,
+      if (data.isNotEmpty) {
+        return ResultEntity(
+          isSuccess: true,
+          data: data,
+        );
+      }
+      return const ResultEntity(
+        isSuccess: false,
+        message: "No data found",
       );
     } catch (_) {
       return const ResultEntity(

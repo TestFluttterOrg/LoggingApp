@@ -6,5 +6,5 @@ class DBConstants {
   static const String logColId = "id";
   static const String logColName = "name";
   static const String logColMessage = "message";
-  static const String logColCreatedAt = "created_at";
+  static const String logColCreatedAt = "createdAt";
 }

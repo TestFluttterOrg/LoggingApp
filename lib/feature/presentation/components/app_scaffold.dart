@@ -18,13 +18,15 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double safePadding = MediaQuery.paddingOf(context).top;
+    double bottomSafePadding = MediaQuery.paddingOf(context).bottom;
     final bNavHeight = 55.h;
     final appBarHeight = appBar?.preferredSize.height ?? 0;
     final bottomNavHeight = bottomBar != null ? bNavHeight : 0;
     final mediaQuery = MediaQuery.of(context).size;
     final width = mediaQuery.width;
     final height = mediaQuery.height;
-    final containerHeight = height - (safePadding + appBarHeight + bottomNavHeight);
+    final containerHeight =
+        height - (safePadding + appBarHeight + bottomNavHeight + bottomSafePadding);
     return Scaffold(
       appBar: appBar,
       body: SafeArea(

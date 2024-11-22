@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logging_app/core/routes/app_routes.dart';
+import 'package:logging_app/feature/domain/model/button_model.dart';
 import 'package:logging_app/feature/presentation/components/app_button.dart';
 import 'package:logging_app/feature/presentation/components/app_scaffold.dart';
 import 'package:logging_app/feature/presentation/main/bloc/main_bloc.dart';
@@ -16,6 +19,17 @@ class MainScreen extends StatelessWidget {
     return AppScaffold(
       appBar: AppBar(
         title: const Text("LOGGING APP"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.push(AppRoutes.logHistory);
+            },
+            icon: Icon(
+              Icons.list,
+              size: 30.h,
+            ),
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(
@@ -27,7 +41,7 @@ class MainScreen extends StatelessWidget {
             if (state is MainLoadingState) {
               return const _LoadingView();
             } else if (state is MainLoadedState) {
-              return const _ButtonListView();
+              return _ButtonListView(buttonList: state.buttonList);
             }
             return const SizedBox();
           },
@@ -56,30 +70,26 @@ class _LoadingView extends StatelessWidget {
 }
 
 class _ButtonListView extends StatelessWidget {
-  const _ButtonListView();
+  final List<ButtonModel> buttonList;
+
+  const _ButtonListView({required this.buttonList});
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<MainBloc>();
-    return BlocBuilder<MainBloc, MainState>(
-      builder: (context, state) {
-        final currentState = state as MainLoadedState;
-        final list = currentState.buttonList;
-        return ListView.separated(
-          itemCount: list.length,
-          itemBuilder: (context, i) {
-            final data = list[i];
-            return AppButton(
-              onPressed: () {
-                bloc.onButtonPressed(data.id);
-              },
-              label: data.label,
-            );
+    return ListView.separated(
+      itemCount: buttonList.length,
+      itemBuilder: (context, i) {
+        final data = buttonList[i];
+        return AppButton(
+          onPressed: () {
+            bloc.onButtonPressed(data.id);
           },
-          separatorBuilder: (context, i) {
-            return SizedBox(height: 20.h);
-          },
+          label: data.label,
         );
+      },
+      separatorBuilder: (context, i) {
+        return SizedBox(height: 20.h);
       },
     );
   }

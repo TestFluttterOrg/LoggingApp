@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
                 titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 16.h,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                 ),
                 iconTheme: const IconThemeData(color: Colors.white),
               ),

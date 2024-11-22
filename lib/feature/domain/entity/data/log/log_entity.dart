@@ -7,7 +7,7 @@ part 'log_entity.freezed.dart';
 @freezed
 class LogEntity with _$LogEntity {
   factory LogEntity({
-    String? id,
+    int? id,
     String? name,
     String? message,
     String? createdAt,

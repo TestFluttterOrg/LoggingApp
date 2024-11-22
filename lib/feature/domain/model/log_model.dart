@@ -1,20 +1,20 @@
 import 'package:equatable/equatable.dart';
 
 class LogModel extends Equatable {
-  final String id;
+  final int id;
   final String name;
   final String message;
   final DateTime? createdAt;
 
   const LogModel({
-    this.id = "",
+    this.id = 0,
     this.name = "",
     this.message = "",
     this.createdAt,
   });
 
   LogModel copyWith({
-    String? id,
+    int? id,
     String? name,
     String? message,
     DateTime? createAt,

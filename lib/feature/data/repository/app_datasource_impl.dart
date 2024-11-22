@@ -1,4 +1,5 @@
 import 'package:logging_app/feature/data/datasource/log_datasource.dart';
+import 'package:logging_app/feature/domain/mapper/entity/log_entity_extension.dart';
 import 'package:logging_app/feature/domain/mapper/model/log_model_extension.dart';
 import 'package:logging_app/feature/domain/model/button_model.dart';
 import 'package:logging_app/feature/domain/model/log_model.dart';
@@ -38,8 +39,26 @@ class AppRepositoryImpl extends AppRepository {
         isSuccess: true,
         message: result.message,
         data: data.copyWith(
-          id: id.toString(),
+          id: id,
         ),
+      );
+    } else {
+      return ResultModel(
+        isSuccess: false,
+        message: result.message,
+      );
+    }
+  }
+
+  @override
+  Future<ResultModel<List<LogModel>>> getLogHistory() async {
+    final result = await logDataSource.getLogs();
+    if (result.isSuccess) {
+      final data = result.data ?? [];
+      final logList = data.map((e) => e.mapToLogModel()).toList();
+      return ResultModel(
+        isSuccess: true,
+        data: logList,
       );
     } else {
       return ResultModel(
