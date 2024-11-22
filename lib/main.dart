@@ -18,7 +18,13 @@ class MyApp extends StatelessWidget {
           title: "Logging App",
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            appBarTheme: const AppBarTheme(
+            appBarTheme: AppBarTheme(
+              color: Colors.blue,
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 16.h,
+                fontWeight: FontWeight.w400,
+              ),
               iconTheme: IconThemeData(color: Colors.white),
             ),
           ),
