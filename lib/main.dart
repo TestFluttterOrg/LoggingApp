@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logging_app/core/routes/routers.dart';
 import 'package:logging_app/core/di/dependency_injection.dart' as di;
+import 'package:logging_app/feature/presentation/main/bloc/main_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +17,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //Set to portrait mode
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -31,26 +32,32 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return ScreenUtilInit(
-      builder: (context, widget) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: "Logging App",
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            appBarTheme: AppBarTheme(
-              color: Colors.blue,
-              titleTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 16.h,
-                fontWeight: FontWeight.w400,
+    return MultiBlocProvider(
+      providers: [
+        //Global BLOCs should store here
+        BlocProvider(create: (_) => di.vf<MainBloc>()),
+      ],
+      child: ScreenUtilInit(
+        builder: (context, widget) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: "Logging App",
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              appBarTheme: AppBarTheme(
+                color: Colors.blue,
+                titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.h,
+                  fontWeight: FontWeight.w400,
+                ),
+                iconTheme: const IconThemeData(color: Colors.white),
               ),
-              iconTheme: const IconThemeData(color: Colors.white),
             ),
-          ),
-          routerConfig: Routes.routers,
-        );
-      },
+            routerConfig: Routes.routers,
+          );
+        },
+      ),
     );
   }
 }
